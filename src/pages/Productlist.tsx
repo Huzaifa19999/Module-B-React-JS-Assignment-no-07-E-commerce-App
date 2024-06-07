@@ -11,32 +11,31 @@ const Productlist = () => {
 
     const [ products, setProducts] = useState<any>([])
 
-    const getProductData = () => {
         axios.get('https://fakestoreapi.com/products')
     .then((res) => {
-        console.log(res.data)
+        // console.log(res.data)
         setProducts([...res.data])
     }).catch((err) => {
         console.log(err)
     });
-};
+
 
 
 
   return (
     <>
     <Navbar/>
-    <button onClick={getProductData} className="m-5 fw-bold p-2 btn btn-primary mx-auto d-block">Show Products List</button>
-    <div  className="product-list container p-5">
+    {/* <button onClick={getProductData} className="m-5 fw-bold p-2 btn btn-primary mx-auto d-block">Show Products List</button> */}
+    <div  className="product-list container mt-5 p-5">
         {products.length===0 ? (
-            <h1 className="fw-bolder heading">Click above to show the list of Products...</h1>
+            <h1 className="fw-bolder heading">Loading...</h1>
         ):(
     products.map((product:any) => (
         <Link key={product.id} to={`/productdetail/${product.id}`}>
         <div  className="card" style={{width: '18rem'}} >
         <img src={product.image} className="card-img-top product-img p-3" alt="..."/>
         <div className="card-body">
-          {/* <p className="card-text text-center fw-bold">{product.title}</p> */}
+          <p className="card-text text-center fw-bold">{product.title}</p>
         </div>
       </div>
         </Link>

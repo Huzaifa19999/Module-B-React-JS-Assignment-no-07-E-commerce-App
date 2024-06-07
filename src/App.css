@@ -1,6 +1,7 @@
 .product-list {
 
     border: 1px lightgray solid;
+    border-radius: 4px;
 }
 
 .parent {
