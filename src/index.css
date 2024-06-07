@@ -1,0 +1,44 @@
+import axios from "axios";
+import 'bootstrap/dist/css/bootstrap.css';
+import { useEffect, useState } from "react";
+import { useParams,Link } from "react-router-dom";
+import '../App.css';
+
+const Productdetail = () => {
+    const { id } = useParams();
+    const [product, setProduct] = useState<any>(null);
+
+    useEffect(() => {
+      fetch(`https://fakestoreapi.com/products/${id}`)
+    .then((res) => {
+      console.log(res.data);
+                setProduct(res.data);
+              }).catch((err) => {
+                console.log(err);
+            });
+        }, [id]);
+            
+
+    return (
+
+<>
+            <Link to='/productlist'>product</Link>
+        <div className="container p-5">
+            {product ? (
+                <div className="card mx-auto" style={{ width: '18rem' }}>
+                    <img src={product.image} className="card-img-top product-img p-5" alt="..." />
+                    <div className="card-body">
+                        <h5 className="card-title">{product.title}</h5>
+                        <p className="card-text">{product.description}</p>
+                        <p className="card-text fw-bold">${product.price}</p>
+                    </div>
+                </div>
+            ) : (
+                <h1 className="fw-bolder heading text-center">Loading...</h1>
+            )}
+        </div>
+    </>
+    );
+};
+
+export default Productdetail;
